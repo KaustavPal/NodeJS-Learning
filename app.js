@@ -1,37 +1,47 @@
 const http = require("http");
-
-// function rqListener(req, res) {
-
-// }
+const fs = require("fs");
 
 const server = http.createServer((req, res) => {
-  //console.log(req);
-  // console.log("Kaustav");
   const url = req.url;
-  if (url === "/home") {
-    res.setHeader("Content-Type", "text/html");
-    res.write("<html>");
-    res.write("<head><title>Home</title></head>");
-    res.write("<body><h1>Welcome to home</h1></body>");
-    res.write("</html>");
-    return res.end();
+  const method = req.method;
+  if (url === "/") {
+    return fs.readFile("message.txt", (err, data) => {
+      if (err) {
+        console.log(err);
+      }
+      res.write("<html>");
+      res.write("<head><title>Enter Message </title></head>");
+      res.write(`<body>${data}</body>`);
+      res.write(
+        "<body><form action='/message' method='POST'><input type='text' name='message'><button type='submit'>Send</button></form></body>"
+      );
+      res.write("</html>");
+      return res.end();
+    });
   }
-  if (url === "/about") {
-    res.setHeader("Content-Type", "text/html");
-    res.write("<html>");
-    res.write("<head><title>About Us</title></head>");
-    res.write("<body><h1>Welcome to About Us page</h1></body>");
-    res.write("</html>");
-    return res.end();
+  if (url === "/message" && method === "POST") {
+    const msg = [];
+    req.on("data", (chunk) => {
+      console.log(chunk);
+      msg.push(chunk);
+    });
+    return req.on("end", () => {
+      const parsedMsg = Buffer.concat(msg).toString();
+      const message = parsedMsg.split("=")[1];
+      console.log(message);
+      fs.writeFile("message.txt", message, (err) => {
+        res.statusCode = 302;
+        res.setHeader("Location", "/");
+        return res.end();
+      });
+    });
   }
-  if (url === "/node") {
-    res.setHeader("Content-Type", "text/html");
-    res.write("<html>");
-    res.write("<head><title>Node Js</title></head>");
-    res.write("<body><h1>Welcome to my Node Js project</h1></body>");
-    res.write("</html>");
-    return res.end();
-  }
+  res.setHeader("Content-Type", "text/html");
+  res.write("<html>");
+  res.write("<head><title>My First Page</title></head>");
+  res.write("<body><h1>Hello from my Node.js Server!</h1></body>");
+  res.write("</html>");
+  res.end();
 });
 
 server.listen(4000);
