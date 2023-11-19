@@ -1,0 +1,73 @@
+.user-form {
+  width: 30rem;
+  max-width: 90%;
+  margin: auto;
+}
+
+h1,
+p {
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 0;
+  color: #3e00a1;
+}
+
+hr {
+  color: #3e00a1;
+}
+
+p,
+hr {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  margin: 1rem 0;
+  border: 1px solid #dbc441;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.form-control label,
+.name,
+.email,
+.phone {
+  display: block;
+  width: 100%;
+}
+
+.form-control input {
+  border: 1px solid #dbc441;
+  font: inherit;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  padding: 5px 0;
+}
+
+.call {
+  display: flex;
+  margin-bottom: 10px;
+}
+.date,
+.time {
+  width: 50%;
+}
+
+button {
+  font: inherit;
+  width: 100%;
+  border: 1px solid #3e00a1;
+  color: #3e00a1;
+  background: white;
+  border-radius: 3px;
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+button:hover,
+button:active {
+  background-color: #3e00a1;
+  color: white;
+}
