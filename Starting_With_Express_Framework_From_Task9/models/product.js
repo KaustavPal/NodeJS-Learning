@@ -46,7 +46,6 @@ module.exports = class Product {
       }
     });
   }
-
   static deleteproductbyID(id) {
     getProductsFromFile((products) => {
       const productIndex = products.findIndex((prod) => prod.id === id);

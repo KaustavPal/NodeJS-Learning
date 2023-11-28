@@ -5,7 +5,6 @@ exports.getAddProduct = (req, res, next) => {
     pageTitle: "Add Product",
     path: "/admin/add-product",
     editing: false,
-    deleting: false,
   });
 };
 
@@ -33,7 +32,6 @@ exports.getEditProduct = (req, res, next) => {
       pageTitle: "Edit Product",
       path: "/admin/edit-product",
       editing: editMode,
-      deleting: false,
       product: product,
     });
   });
@@ -55,27 +53,6 @@ exports.postEditProduct = (req, res, next) => {
   updatedProduct.save();
   res.redirect("/admin/products");
 };
-
-// exports.getDeleteProduct = (req, res, next) => {
-//   const deleteMode = req.query.delete;
-//   console.log(deleteMode);
-//   if (!deleteMode) {
-//     return res.redirect("/");
-//   }
-//   const prodId = req.params.productId;
-//   Product.findById(prodId, (product) => {
-//     if (!product) {
-//       return res.redirect("/");
-//     }
-//     res.render("admin/edit-product", {
-//       pageTitle: "Delete Product",
-//       path: "/admin/Delete-product",
-//       editMode: false,
-//       deleting: deleteMode,
-//       product: product,
-//     });
-//   });
-// };
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
