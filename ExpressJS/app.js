@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 
 //const rootDir = require("./util/path");
 const error404Controller = require("./controllers/404");
-const db = require("./util/dayabase");
+const db = require("./util/database");
 
 const app = express();
 
